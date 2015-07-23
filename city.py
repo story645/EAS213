@@ -1,8 +1,8 @@
 import numpy as np
 
 datakeys = [u'EMXP', u'MXSD', u'TPCP', 
-	            u'TSNW', u'EMXT', u'EMNT', 
-				u'MMXT', u'MMNT', u'MNTM']
+	        u'TSNW', u'EMXT', u'EMNT', 
+			u'MMXT', u'MMNT', u'MNTM']
 				
 def filter_city(df, city_filter):
 	inds = [sn.endswith(city_filter) 
