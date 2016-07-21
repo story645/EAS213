@@ -56,7 +56,7 @@ def BT(I, wl, e):
     A = 1.19e8   # watts microns^4/m^2
     B = 1.441e4  # micron-kelvins
     T = B / (wl * np.log(1 + (e * A / (I * wl**5))))
-    return T
+    return np.squeeze(T)
 
 
 def grayscale_display(img_array):
