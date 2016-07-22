@@ -20,24 +20,29 @@ def landsat_read(filename, skip_rows=5):
 
     return data_array
 
+def rgb_contrast(rgb_array, contrast):
+    """returns an RGB image adjusted based
+    on contrast level
+    """
+    rgbc_array = rgb_array * contrast
+    low = (rgbc_array < 0)
+    rgbc_array[low] = 0
+
+    high = (rgbc_array > 1)
+    rgbc_array[high] = 1
+    return rgbc_array
 
 def rgb_display(rgb_array):
-    """displayes RGB image x contrast,
+    """displays RGB image x contrast,
         railed off if too high or low
     """
-
+    contrast = 1
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
     contrast = 1
 
     while contrast:
-        rgbc_array = contrast * rgb_array
-
-        low = (rgbc_array < 0)
-        rgbc_array[low] = 0
-
-        high = (rgbc_array > 1)
-        rgbc_array[high] = 1
+        rgbc_array  = rgb_contrast(rgb_array, contrast)
         ax.imshow(rgbc_array, interpolation='bilinear', origin='upper')
         fig.canvas.draw()
 
