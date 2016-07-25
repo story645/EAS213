@@ -1,6 +1,7 @@
 # set of functions to work with landsat data formatted for HIRES
 
 import numpy as np
+import scipy.stats as st
 import matplotlib.pyplot as plt
 
 
@@ -20,6 +21,7 @@ def landsat_read(filename, skip_rows=5):
 
     return data_array
 
+
 def rgb_contrast(rgb_array, contrast):
     """returns an RGB image adjusted based
     on contrast level
@@ -31,6 +33,7 @@ def rgb_contrast(rgb_array, contrast):
     high = (rgbc_array > 1)
     rgbc_array[high] = 1
     return rgbc_array
+
 
 def rgb_display(rgb_array):
     """displays RGB image x contrast,
@@ -49,6 +52,30 @@ def rgb_display(rgb_array):
         contrast = int(input("Enter Contrast, 0 to exit: "))
 
     return rgbc_array
+
+def pdf(data, x=None):
+    if x is None:
+        x = np.linspace(0, 1, 100)
+    kernal = st.gaussian_kde(data.flatten())
+    y = kernal(x)
+    return y
+
+
+def RGB_hists(rgb_array, ax=None, label=None):
+    x = np.linspace(0, 1, 100)
+    colors = ['red', 'green', 'blue']
+
+    if not ax:
+        fig = plt.figure()
+        ax = fig.add_subplot(1, 1, 1)
+
+    for i, c in enumerate(colors):
+        ax.plot(x, pdf(rgb_array[..., i], x), color=c, label=label)
+
+    if label:
+        ax.legend()
+
+    return ax
 
 
 def BT(I, wl, e):
