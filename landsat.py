@@ -98,3 +98,24 @@ def grayscale_display(img_array):
     ax = fig.add_subplot(1, 1, 1)
     ax.imshow(img_array, cmap="gray")
     return
+
+def make_classification(rgb_array, rgbn, rv, gv, bv, nirv, tol):
+    
+    red = rgb_array[...,0]
+    green = rgb_array[...,1]
+    blue = rgb_array[...,2]
+    nir = rgbn[...,3]
+
+    rmask = (rv-tol < red) & (red< rv + tol)
+    gmask = (gv-tol < green) & (green< gv + tol)
+    bmask = (bv-tol < blue) & (blue < bv+tol)
+    nmask = (nirv-tol < nir) & (nir  < nirv+tol)
+
+    mask = np.empty(rgb_array.shape)*np.nan
+    for i in range(mask.shape[2]):
+        mask[...,i] = (rmask & gmask & bmask & nmask)
+
+    return np.ma.MaskedArray(rgb_array,mask=mask)
+
+def NDVI(nir, red):
+    return (nir-red)/(nir+red)
