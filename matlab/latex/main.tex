@@ -1,0 +1,334 @@
+
+\documentclass[xcolor={dvipsnames}]{beamer}
+\usepackage{amsmath,amsfonts,amssymb,pxfonts,eulervm,xspace}
+\usepackage{graphicx}
+ \usepackage{multimedia}
+\usepackage{media9}
+\usepackage{minted}
+
+\graphicspath{{./figures/}}
+\usetheme{ccnycrest}
+
+
+\newenvironment{changemargin}[2]{%
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{#1}%
+\setlength{\rightmargin}{#2}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+}%
+\item[]}{\end{list}}
+
+\begin{document}
+
+\title{Matlab \Leftrightarrow Python}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}[fragile]{}
+
+\begin{block}{Matlab}
+\begin{minted}{matlab}
+disp("Hello World!");
+\end{minted}
+\end{block}
+
+\begin{block}{Python}
+\begin{minted}{python}
+print("Hello World!")
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Comments}
+
+\begin{block}{Matlab}
+\begin{minted}{matlab}
+% this is a comment
+
+%{
+   This is a long comment in Matlab 7
+%}
+\end{minted}
+\end{block}
+
+\begin{block}{Python}
+\begin{minted}{python}
+# this is a comment
+
+"""
+   This is a long comment 
+"""
+\end{minted}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Variables}
+\begin{block}{Matlab}
+\begin{minted}{matlab}
+x = 5.71;
+I = besseli(x,A);
+A = [1 2 3; 4 5 6; 7 8 9];
+\end{minted}
+\end{block}
+
+\begin{block}{Python}
+\begin{minted}{python}
+x = 5.71
+
+import numpy as np
+A = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
+I = besseli(x,A)
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{String Formatting}
+
+\begin{block}{Matlab}
+\begin{minted}{matlab}
+A = pi*ones(1,3);
+txt = sprintf('%f | %.2f | %12f', A);
+\end{minted}
+\end{block}
+
+\begin{block}{Python}
+\begin{minted}{python}
+A = np.pi*np.ones(3)
+text = "{:f} | {:.2f} | {:.12f}".format(*A)
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{User Input}
+
+\begin{block}{Matlab}
+\begin{minted}{matlab}
+x = input(prompt);
+str_input = input(prompt,'s');
+\end{minted}
+\end{block}
+
+\begin{block}{Python}
+\begin{minted}{python}
+str_input = input(prompt)
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Selection Statements}
+
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Matlab}
+\begin{minted}{matlab}
+if x > 5
+    y = 2;
+elseif x < 0
+    y = 8;
+else
+    y=24;
+end
+\end{minted}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{Python}
+\begin{minted}{python}
+if x>5:
+    y=2
+elif x<0:
+    y=8
+else:
+    y=24
+\end{minted}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{For Loops}
+
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{Matlab}
+\begin{minted}{matlab}
+x = ones(1,10);
+for n = 2:6
+    x(n) = 2 * x(n - 1);
+end
+\end{minted}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{Python}
+\begin{minted}{python}
+x = np.ones(10)
+for n in range(2,7):
+    x[n] = 2*x[n-1]
+    
+\end{minted}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{While Loops}
+
+
+\begin{block}{Matlab}
+\begin{minted}{matlab}
+n = 1;
+nFactorial = 1;
+while nFactorial < 1e100
+    n = n + 1;
+    nFactorial = nFactorial * n;
+end
+\end{minted}
+\end{block}
+
+\begin{block}{Python}
+\begin{minted}{python}
+n = 1
+nFactorial = 1
+while nFactorial < 1e100:
+    n+=1
+    nFactorial*=n
+
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Defining Functions}
+
+\begin{block}{Matlab}
+\begin{minted}{matlab}
+function f = fact(n)
+    f = prod(1:n);
+end
+\end{minted}
+\end{block}
+
+\begin{block}{Python}
+\begin{minted}{python}
+def fact(n):
+    f = np.prod(np.arange(1,n+1))
+    return f
+\end{minted}
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Using Functions}
+
+\begin{block}{Matlab}
+\begin{minted}{matlab}
+% Put file (usually func_name.m) in same folder or on path 
+% Just call the function
+
+myfunction(x);
+\end{minted}
+\end{block}
+
+\begin{block}{Python}
+\begin{minted}{python}
+from myfile import myfunction
+
+myfunction(x)
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Creating Classes: Matlab}
+\begin{minted}{matlab}
+classdef BasicClass
+   properties
+      Value
+   end
+   methods
+        function obj = BasicClass(val)
+            if val > 0
+                obj.Value = val;
+            else
+                error('Value must be numeric')
+            end
+        end
+        ...
+    end
+end
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Creating Classes: Matlab cont.}
+\begin{minted}{matlab}
+classdef BasicClass
+        ...
+    methods
+        ...
+        function r = roundOff(obj)
+            r = round([obj.Value],2);
+        end
+        function r = multiplyBy(obj,n)
+            r = [obj.Value] * n;
+        end
+    end
+end
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Creating Classes: Python}
+\begin{minted}{python}
+class BasicClass(object):
+    def __init__(self, value):
+        if val>0:
+            self.value = value
+        else:
+            raise ValueError("Value must be positive")
+            
+    def roundOff(self):
+        return round(self.Value, 2)
+    
+    def multiplyBy(self, n):
+        return self.Value * n
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Creating Objects}
+
+\begin{block}{Matlab}
+\begin{minted}{matlab}
+a = BasicClass(pi/3);
+roundOff(a);
+multiplyBy(a,3);
+a.multiplyB(3);
+\end{minted}
+\end{block}
+\begin{block}{Python}
+\begin{minted}{python}
+a = BasicClass(np.pi/3)
+a.Value = np.pi/2
+a.roundOff()
+a.multiplyBy(3)
+\end{minted}
+\end{block}
+\end{frame}
+
+\begin{frame}{How do we use this info?}
+\begin{description}
+\item[Get Python]
+\url{https://www.continuum.io/downloads}
+\item[Translate]
+\url{https://docs.scipy.org/doc/numpy-dev/user/numpy-for-matlab-users.html}
+\item[Python in Matlab] \url{https://www.mathworks.com/help/matlab/call-python-libraries.htm}
+\item[Matlab in Python]
+\url{https://www.mathworks.com/help/matlab/matlab_external/call-matlab-functions-from-python.html}
+\end{description}
+\end{frame}
+
+\end{document}
+
