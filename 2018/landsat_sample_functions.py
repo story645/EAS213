@@ -1,9 +1,6 @@
-# set of functions to work with landsat data formatted for HIRES
-
 import numpy as np
 import matplotlib.pyplot as plt
-
-# --------------------------------
+# set of functions to work with landsat data formatted for HIRES
 
 def landsat_read(filename):
     """read in the provided landset text file
@@ -52,7 +49,8 @@ def rgb_display(rgb_array):
     """
     
     contrast = 1
-   
+    
+    fig, ax = plt.subplots()
     while contrast:
         rgbc_array = contrast*rgb_array
         maximg = rgbc_array.max()
@@ -62,11 +60,9 @@ def rgb_display(rgb_array):
         
         high = (rgbc_array>1)
         rgbc_array[high] = 1
-        
-        plt.ion()
-        plt.imshow(rgbc_array, interpolation='bilinear', origin='upper')
-        plt.show()
-
+       
+        ax.imshow(rgbc_array, interpolation='bilinear', origin='upper')
+        fig.canvas.draw()
         contrast = int(input("Enter Contrast, 0 to exit: "))
 
     return rgbc_array
@@ -107,8 +103,8 @@ def grayscale_display(img_array):
         gray_array[ : , : ,i ] = img_array
     
 
-    plt.ion()
-    plt.imshow(gray_array,origin='upper')
-    plt.show()
+    fig, ax = plt.subplots()
+    ax.imshow(gray_array,origin='upper')
+    fig.canvas.draw()
 
     showplot = input("press return to exit plot")
