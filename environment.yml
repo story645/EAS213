@@ -3,22 +3,27 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  - python=2.7
   - cmocean
+  - fiona
+  - gdal
   - geopandas
   - ipympl
+  - jupyter
   - kiwisolver
+  - krb5
   - matplotlib
   - nb_conda_kernels
+  - netcdf4
   - numpy
   - pandas
-  - python=2.7.15=0
   - scipy
   - seaborn
   - xarray
-  - netcdf4
+  - xlrd
   - pip
   - pip:
     - quilt
-    - xlrd
+    
 prefix: /Users/hannah/miniconda3/envs/hires
 
