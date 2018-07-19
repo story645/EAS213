@@ -6,6 +6,7 @@ dependencies:
   - cmocean
   - geopandas
   - ipympl
+  - jupyter
   - kiwisolver
   - matplotlib
   - nb_conda_kernels
