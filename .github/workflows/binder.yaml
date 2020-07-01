@@ -1,4 +1,4 @@
-name: Build Notebook Container
+name: Binder Container
 on: push
 
 jobs:
