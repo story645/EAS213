@@ -6,12 +6,12 @@ jobs:
     steps:
 
     - name: checkout code 
-      uses: actions/checkout@master
+      uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.sha }}
 
     - name: update jupyter dependencies with repo2docker
-      uses: machine-learning-apps/repo2docker-action@master
+      uses: machine-learning-apps/repo2docker-action@0.2
       with:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
