@@ -1,2 +1,4 @@
 #!/bin/bash
 quilt install
+jupyter labextension install @jupyter-widgets/jupyterlab-manager
+jupyter labextension install jupyter-matplotlib
