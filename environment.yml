@@ -6,8 +6,16 @@ dependencies:
   - python
   - jupyter
   - pandas
+  - xlrd
   - geopandas
+  - netcdf4
+  - xarray
+  - scipy
   - matplotlib
-  - ipympl
   - descartes
+  - ipympl
   - seaborn
+  - cmocean
+  - pip
+  - pip:
+    - quilt
